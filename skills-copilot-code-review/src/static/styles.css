@@ -694,15 +694,15 @@ footer {
     width: 80%;
 }
 
-.close-modal {
+#announcement-modal .close-modal {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close-modal:hover,
-.close-modal:focus {
+#announcement-modal .close-modal:hover,
+#announcement-modal .close-modal:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
