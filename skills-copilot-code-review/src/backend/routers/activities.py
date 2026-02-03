@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import RedirectResponse
 from typing import Dict, Any, Optional, List
 
-from ..database import activities_collection, teachers_collection
+from ..database import activities_collection, teachers_collection, announcements_collection
 
 router = APIRouter(
     prefix="/activities",
@@ -136,3 +136,34 @@ def unregister_from_activity(activity_name: str, email: str, teacher_username: O
             status_code=500, detail="Failed to update activity")
 
     return {"message": f"Unregistered {email} from {activity_name}"}
+
+
+@router.get('/announcements', response_model=List[Dict[str, Any]])
+def get_announcements():
+    """Retrieve all announcements."""
+    return list(announcements_collection.find())
+
+
+@router.post('/announcements', response_model=Dict[str, Any])
+def create_announcement(announcement: Dict[str, Any]):
+    """Create a new announcement."""
+    announcement_id = announcements_collection.insert_one(announcement).inserted_id
+    return {"id": str(announcement_id)}
+
+
+@router.put('/announcements/{announcement_id}', response_model=Dict[str, Any])
+def update_announcement(announcement_id: str, announcement: Dict[str, Any]):
+    """Update an existing announcement."""
+    result = announcements_collection.update_one({"_id": announcement_id}, {"$set": announcement})
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Announcement not found")
+    return {"id": announcement_id}
+
+
+@router.delete('/announcements/{announcement_id}', response_model=Dict[str, Any])
+def delete_announcement(announcement_id: str):
+    """Delete an announcement."""
+    result = announcements_collection.delete_one({"_id": announcement_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Announcement not found")
+    return {"id": announcement_id}
