@@ -865,4 +865,30 @@ document.addEventListener("DOMContentLoaded", () => {
   checkAuthentication();
   initializeFilters();
   fetchActivities();
+
+  // Announcement management
+  const announcementButton = document.getElementById('announcement-button');
+  const announcementModal = document.getElementById('announcement-modal');
+  const announcementList = document.getElementById('announcement-list');
+
+  announcementButton.addEventListener('click', () => {
+      announcementModal.style.display = 'block';
+      loadAnnouncements();
+  });
+
+  function loadAnnouncements() {
+      fetch('/activities/announcements')
+          .then(response => response.json())
+          .then(announcements => {
+              announcementList.innerHTML = '';
+              announcements.forEach(announcement => {
+                  const li = document.createElement('li');
+                  li.textContent = `${announcement.content} (Expires: ${announcement.expiration_date})`;
+                  announcementList.appendChild(li);
+              });
+          });
+  }
+
+  // Add event listeners for add, update, delete buttons in the modal
+  // ... (additional code for handling add/update/delete actions) ...
 });
