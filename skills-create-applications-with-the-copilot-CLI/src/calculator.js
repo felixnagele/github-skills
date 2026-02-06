@@ -8,6 +8,9 @@
  * - Subtraction (-): Subtract numbers
  * - Multiplication (×): Multiply numbers
  * - Division (÷): Divide numbers with error handling for division by zero
+ * - Modulo (%): Returns the remainder of division
+ * - Power (^): Raises base to the exponent
+ * - Square Root (√): Returns the square root of a number
  * 
  * Usage: node calculator.js <operation> <number1> <number2> [number3...]
  * Example: node calculator.js add 5 3
@@ -43,14 +46,36 @@ function divide(...numbers) {
     });
 }
 
+// Modulo: Returns the remainder of a divided by b
+function modulo(a, b) {
+    if (b === 0) {
+        throw new Error('Modulo by zero is not allowed');
+    }
+    return a % b;
+}
+
+// Power: Returns base raised to the exponent
+function power(base, exponent) {
+    return Math.pow(base, exponent);
+}
+
+// Square Root: Returns the square root of n with error handling for negative numbers
+function squareRoot(n) {
+    if (n < 0) {
+        throw new Error('Square root of negative numbers is not supported');
+    }
+    return Math.sqrt(n);
+}
+
 // Main CLI function
 function calculator() {
     const args = process.argv.slice(2);
     
-    if (args.length < 3) {
+    if (args.length < 2) {
         console.log('Usage: node calculator.js <operation> <number1> <number2> [number3...]');
-        console.log('Operations: add, subtract, multiply, divide');
+        console.log('Operations: add, subtract, multiply, divide, modulo, power, sqrt');
         console.log('Example: node calculator.js add 5 3');
+        console.log('         node calculator.js sqrt 16');
         process.exit(1);
     }
     
@@ -87,9 +112,36 @@ function calculator() {
             case '÷':
                 result = divide(...numbers);
                 break;
+            case 'modulo':
+            case 'mod':
+            case '%':
+                if (numbers.length !== 2) {
+                    console.error('Error: Modulo requires exactly 2 numbers');
+                    process.exit(1);
+                }
+                result = modulo(numbers[0], numbers[1]);
+                break;
+            case 'power':
+            case 'pow':
+            case '^':
+                if (numbers.length !== 2) {
+                    console.error('Error: Power requires exactly 2 numbers (base and exponent)');
+                    process.exit(1);
+                }
+                result = power(numbers[0], numbers[1]);
+                break;
+            case 'sqrt':
+            case 'squareroot':
+            case '√':
+                if (numbers.length !== 1) {
+                    console.error('Error: Square root requires exactly 1 number');
+                    process.exit(1);
+                }
+                result = squareRoot(numbers[0]);
+                break;
             default:
                 console.error(`Error: Unknown operation '${operation}'`);
-                console.log('Supported operations: add, subtract, multiply, divide');
+                console.log('Supported operations: add, subtract, multiply, divide, modulo, power, sqrt');
                 process.exit(1);
         }
         
@@ -110,5 +162,8 @@ module.exports = {
     add,
     subtract,
     multiply,
-    divide
+    divide,
+    modulo,
+    power,
+    squareRoot
 };
