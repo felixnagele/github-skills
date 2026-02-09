@@ -2,11 +2,19 @@
 MongoDB database configuration and setup for Mergington High School API
 """
 
-from pymongo import MongoClient
+try:
+    from pymongo import MongoClient
+    _client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=1000)
+    _client.server_info()  # Test connection
+    client = _client
+except:
+    # Fallback to mongomock if MongoDB is not available
+    from mongomock import MongoClient
+    client = MongoClient()
+
 from argon2 import PasswordHasher
 
-# Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
+# Connect to database
 db = client['mergington_high']
 activities_collection = db['activities']
 teachers_collection = db['teachers']
@@ -165,7 +173,7 @@ initial_activities = {
         "participants": ["william@mergington.edu", "jacob@mergington.edu"]
     },
     "Manga Maniacs": {
-        "description": "Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).",
+        "description": "Unleash your inner otaku! Dive into epic adventures, discover legendary heroes, and explore fantastical worlds through the art of Japanese Manga. From shonen battles to slice-of-life stories, join fellow manga enthusiasts to discuss your favorite series!",
         "schedule": "Tuesdays, 7:00 PM - 8:00 PM",
         "schedule_details": {
             "days": ["Tuesday"],
