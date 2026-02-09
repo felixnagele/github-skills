@@ -520,8 +520,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     // Create share buttons
-    const shareUrl = encodeURIComponent(window.location.href);
-    const shareText = encodeURIComponent(`Check out ${name} at Mergington High School - ${details.description}`);
     const shareButtons = `
       <div class="share-buttons">
         <span class="share-label">Share:</span>
@@ -659,7 +657,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navigator.clipboard.writeText(url).then(() => {
           showMessage('Link copied to clipboard!', 'success');
         }).catch(() => {
-          showMessage('Failed to copy link', 'error');
+          showMessage('Failed to copy link. Try manually copying the URL from your browser\'s address bar.', 'error');
         });
         break;
     }
