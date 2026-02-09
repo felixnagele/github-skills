@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
   
   if (darkModeToggle) {
-    const themeIcon = darkModeToggle.querySelector(".theme-icon");
+    const themeEmoji = darkModeToggle.querySelector(".theme-emoji");
     const themeText = document.getElementById("theme-text");
 
-    if (themeIcon && themeText) {
+    if (themeEmoji && themeText) {
       // Check for saved theme preference or default to light mode
       const currentTheme = localStorage.getItem("theme") || "light";
       if (currentTheme === "dark") {
         document.body.classList.add("dark-mode");
-        themeIcon.textContent = "☀️";
+        themeEmoji.textContent = "☀️";
         themeText.textContent = "Light";
       }
 
@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const isDarkMode = document.body.classList.contains("dark-mode");
         
         if (isDarkMode) {
-          themeIcon.textContent = "☀️";
+          themeEmoji.textContent = "☀️";
           themeText.textContent = "Light";
           localStorage.setItem("theme", "dark");
         } else {
-          themeIcon.textContent = "🌙";
+          themeEmoji.textContent = "🌙";
           themeText.textContent = "Dark";
           localStorage.setItem("theme", "light");
         }
