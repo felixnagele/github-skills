@@ -8,7 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (themeEmoji && themeText) {
       // Check for saved theme preference or default to light mode
-      const currentTheme = localStorage.getItem("theme") || "light";
+      let currentTheme = "light";
+      try {
+        currentTheme = localStorage.getItem("theme") || "light";
+      } catch (e) {
+        console.warn("localStorage not available, using default theme");
+      }
+      
       if (currentTheme === "dark") {
         document.body.classList.add("dark-mode");
         themeEmoji.textContent = "☀️";
@@ -23,11 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isDarkMode) {
           themeEmoji.textContent = "☀️";
           themeText.textContent = "Light";
-          localStorage.setItem("theme", "dark");
+          try {
+            localStorage.setItem("theme", "dark");
+          } catch (e) {
+            console.warn("Unable to save theme preference");
+          }
         } else {
           themeEmoji.textContent = "🌙";
           themeText.textContent = "Dark";
-          localStorage.setItem("theme", "light");
+          try {
+            localStorage.setItem("theme", "light");
+          } catch (e) {
+            console.warn("Unable to save theme preference");
+          }
         }
       });
     }
