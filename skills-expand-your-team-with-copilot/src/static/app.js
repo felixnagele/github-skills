@@ -1,32 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Dark mode toggle functionality
   const darkModeToggle = document.getElementById("dark-mode-toggle");
-  const themeIcon = darkModeToggle.querySelector(".theme-icon");
-  const themeText = document.getElementById("theme-text");
+  
+  if (darkModeToggle) {
+    const themeIcon = darkModeToggle.querySelector(".theme-icon");
+    const themeText = document.getElementById("theme-text");
 
-  // Check for saved theme preference or default to light mode
-  const currentTheme = localStorage.getItem("theme") || "light";
-  if (currentTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    themeIcon.textContent = "☀️";
-    themeText.textContent = "Light";
-  }
-
-  // Toggle dark mode
-  darkModeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    const isDarkMode = document.body.classList.contains("dark-mode");
-    
-    if (isDarkMode) {
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem("theme") || "light";
+    if (currentTheme === "dark") {
+      document.body.classList.add("dark-mode");
       themeIcon.textContent = "☀️";
       themeText.textContent = "Light";
-      localStorage.setItem("theme", "dark");
-    } else {
-      themeIcon.textContent = "🌙";
-      themeText.textContent = "Dark";
-      localStorage.setItem("theme", "light");
     }
-  });
+
+    // Toggle dark mode
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      
+      if (isDarkMode) {
+        themeIcon.textContent = "☀️";
+        themeText.textContent = "Light";
+        localStorage.setItem("theme", "dark");
+      } else {
+        themeIcon.textContent = "🌙";
+        themeText.textContent = "Dark";
+        localStorage.setItem("theme", "light");
+      }
+    });
+  }
 
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
