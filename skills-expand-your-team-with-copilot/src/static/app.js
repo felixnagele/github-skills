@@ -1,4 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode toggle functionality
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  
+  if (darkModeToggle) {
+    const themeEmoji = darkModeToggle.querySelector(".theme-emoji");
+    const themeText = document.getElementById("theme-text");
+
+    if (themeEmoji && themeText) {
+      // Check for saved theme preference or default to light mode
+      let currentTheme = "light";
+      try {
+        currentTheme = localStorage.getItem("theme") || "light";
+      } catch (e) {
+        console.warn("localStorage not available, using default theme");
+      }
+      
+      if (currentTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeEmoji.textContent = "☀️";
+        themeText.textContent = "Light";
+      }
+
+      // Toggle dark mode
+      darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        
+        if (isDarkMode) {
+          themeEmoji.textContent = "☀️";
+          themeText.textContent = "Light";
+          try {
+            localStorage.setItem("theme", "dark");
+          } catch (e) {
+            console.warn("Unable to save theme preference");
+          }
+        } else {
+          themeEmoji.textContent = "🌙";
+          themeText.textContent = "Dark";
+          try {
+            localStorage.setItem("theme", "light");
+          } catch (e) {
+            console.warn("Unable to save theme preference");
+          }
+        }
+      });
+    }
+  }
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
