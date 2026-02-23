@@ -10,6 +10,7 @@ Guidance for managing day-to-day execution and tracking progress toward project 
 
 ## Workflows
 - Use the project board (e.g., GitHub Projects) with columns: Backlog, Ready, In Progress, In Review, QA, Done
+  - **QA column ownership**: The **QA Lead** is responsible for items in the `QA` column. An item enters `QA` when a PR is merged to the integration branch and automated CI has passed. The QA Lead verifies acceptance criteria, runs or coordinates regression tests, and moves the card to `Done` only when the [Quality Gates & Definition of Done](octoacme-quality-gates-and-dod.md) checklist is fully satisfied.
 - Pull Request workflow:
   - Small PRs (<= 400 lines when possible)
   - Include issue link and acceptance criteria in PR description
@@ -22,6 +23,7 @@ Guidance for managing day-to-day execution and tracking progress toward project 
 - End-to-end smoke tests for critical flows before release
 - Security scanning in CI
 - Manual QA for feature acceptance when needed
+- See the [Quality Gates & Definition of Done](octoacme-quality-gates-and-dod.md) checklist for the full DoD and gate ownership.
 
 ## Reporting & Metrics
 - Track velocity and burndown

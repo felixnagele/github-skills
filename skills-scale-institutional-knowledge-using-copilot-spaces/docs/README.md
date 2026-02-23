@@ -24,6 +24,8 @@ Quality assurance and continuous improvement are woven into every stage. Accepta
 | [Release & Deployment Guide](octoacme-release-and-deployment.md) | Release checklist, deployment steps, verification, and stakeholder announcements |
 | [Retrospective & Continuous Improvement](octoacme-retrospective-and-continuous-improvement.md) | Retrospective format, action-item tracking, and feeding learnings back into the process |
 | [Roles and Personas](octoacme-roles-and-personas.md) | Detailed responsibilities, goals, and communication patterns for each OctoAcme role |
+| [Quality Gates & Definition of Done](octoacme-quality-gates-and-dod.md) | Quality gate checklist, DoD criteria, and role ownership for each stage |
+| [Release Readiness & Incident/Feedback Intake](octoacme-release-readiness-checklist.md) | Go-No-Go release checklist and incident/customer feedback intake template |
 
 ---
 
