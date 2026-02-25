@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-function ResourceView({ resourceKey, title, emptyMessage }) {
+function ResourceView({ resourceKey, title, emptyMessage, apiUrl }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -8,13 +8,16 @@ function ResourceView({ resourceKey, title, emptyMessage }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const endpoint = useMemo(() => {
+    if (apiUrl) {
+      return apiUrl.endsWith("/") ? apiUrl : `${apiUrl}/`;
+    }
     const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
     const apiBaseUrl = codespaceName
       ? `https://${codespaceName}-8000.app.github.dev/api`
       : "http://localhost:8000/api";
 
     return `${apiBaseUrl}/${resourceKey}/`;
-  }, [resourceKey]);
+  }, [apiUrl, resourceKey]);
 
   const fetchItems = useCallback(() => {
     console.log(`[${title}] REST API endpoint:`, endpoint);
