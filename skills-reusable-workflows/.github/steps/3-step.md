@@ -26,7 +26,7 @@ In the following activity we will expand the `CI` workflow that will deploy **Oc
 1. In the left sidebar click on `Pages`
 1. Under `Source` select `GitHub Actions`
 
-<img width="900" alt="image showing GitHub Pages settings" src="../images/pages-settings.png" />
+<img width="900" alt="image showing GitHub Pages settings" src="https://github.com/felixnagele/skills-reusable-workflows/blob/main/.github/images/pages-settings.png?raw=true" />
 
 Now you are ready to add a deployment job to your workflow that will deploy the app to GitHub Pages on every pull request!
 

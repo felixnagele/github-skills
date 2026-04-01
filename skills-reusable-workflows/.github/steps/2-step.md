@@ -64,7 +64,7 @@ Let's see your workflow running by opening a pull request!
 
 1. As you scroll down, you may need to expand the **Checks** section. Then you will see the CI workflow running three separate jobs in detail.
 
-    <img width="600" alt="image showing PR checks running" src="../images/ci-checks-running.png" />
+    <img width="600" alt="image showing PR checks running" src="https://github.com/felixnagele/skills-reusable-workflows/blob/main/.github/images/ci-checks-running.png?raw=true" />
 
    > 💡 You will also see some additional checks with names like `Step ...`. Those checks are used to run this exercise, so you don't need to worry about them. If one of those checks fails, come back to this issue and review Mona's feedback.
 
