@@ -13,3 +13,32 @@ jobs:
     uses: ./.github/workflows/reusable-node-quality.yml
     with:
       node-version: 24
+
+  github-pages:
+    name: Deploy to GitHub Pages
+    needs: quality
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+        node-version: "24"
+    permissions:
+        contents: read
+        pages: write
+        id-token: write
+    
+  comment:
+    name: Comment on PR
+    if: always()
+    needs: github-pages
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment with Pages URL
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            | Item | Link |
+            | --- | --- |
+            | 🌐 GitHub Pages URL | ${{ needs.github-pages.outputs.page_url }} |
+            | 🧾 Workflow logs | https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} |
