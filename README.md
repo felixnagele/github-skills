@@ -47,6 +47,6 @@ python github_skills_migrate.py --monorepo {monorepo URL} --source {source repo 
 
 No tests are available.
 
-## Contributing, License & Support
+## 📝 Note
 
-See [Community Profile](https://github.com/felixnagele/github-skills/community) for guidelines, license, and support.
+This is a personal repository for tracking my progress and archiving my solutions. It is not intended for external contributions.
