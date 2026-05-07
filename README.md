@@ -14,9 +14,7 @@ All exercises are stored as directories with their full commit history (extracte
 
 Required only if you want to use the migration script.
 
-- Python
-- git available in PATH
-- git-filter-repo installed
+- uv (with a Python runtime)
 - Access to source and destination repositories
 
 ## 🚀 Quick Start
@@ -32,9 +30,25 @@ cd github-skills
 
 A helper script to import a source repository (including full commit history) into a monorepo subdirectory using git-filter-repo.
 
+### Recommended setup with uv
+
+```bash
+uv tool install git-filter-repo
+```
+
+```bash
+uv run python github_skills_migrate.py --monorepo {monorepo URL} --source {source repo URL}
+```
+
+If you prefer not to install the tool globally, the script also falls back to `uv tool run git-filter-repo` automatically.
+
+### Default python setup
+
 ```bash
 python github_skills_migrate.py --monorepo {monorepo URL} --source {source repo URL}
 ```
+
+This works as long as `git-filter-repo` is already available on `PATH`.
 
 ### Options
 
