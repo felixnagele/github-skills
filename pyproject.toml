@@ -1,0 +1,13 @@
+[project]
+name = "github-skills"
+version = "0.0.0"
+description = "Monorepo archive of my completed GitHub Skills exercises with a migration tool"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = ["git-filter-repo>=2.47"]
+
+
+[tool.uv]
+package = false
+# Ignore all releases published in the last 7 days
+exclude-newer = "7 days"

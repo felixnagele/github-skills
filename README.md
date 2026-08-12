@@ -15,6 +15,7 @@ All exercises are stored as directories with their full commit history (extracte
 Required only if you want to use the migration script.
 
 - uv (with a Python runtime)
+- git
 - Access to source and destination repositories
 
 ## 🚀 Quick Start
@@ -30,36 +31,28 @@ cd github-skills
 
 A helper script to import a source repository (including full commit history) into a monorepo subdirectory using git-filter-repo.
 
-### Recommended setup with uv
+### Setup
 
 ```bash
-uv tool install git-filter-repo
+uv sync
 ```
+
+### Usage
 
 ```bash
-uv run python github_skills_migrate.py --monorepo {monorepo URL} --source {source repo URL}
+uv run python migrate_skill.py --monorepo {monorepo URL} --source {source repo URL}
 ```
-
-If you prefer not to install the tool globally, the script also falls back to `uv tool run git-filter-repo` automatically.
-
-### Default python setup
-
-```bash
-python github_skills_migrate.py --monorepo {monorepo URL} --source {source repo URL}
-```
-
-This works as long as `git-filter-repo` is already available on `PATH`.
 
 ### Options
 
 - --monorepo - destination monorepo URL
 - --source - source repo URL
-- --branch - optional: source branch (auto-detect otherwise)
-- --dry-run - print commands only; no changes or pushes
+- --branch - optional: source branch (auto-detected otherwise)
+- --dry-run - print commands only; no changes, no files created
+- --no-push - merge locally, skip pushing to origin (work directory is kept)
+- --keep-work-dir - keep the work directory even after a successful push
 
-## 🧪 Running Tests
-
-No tests are available.
+The script works in a temporary system directory that is deleted automatically after a successful push. It is kept when a step fails (so you can resolve it), when using --no-push (the local merge is the result), or with --keep-work-dir; the path is printed in those cases.
 
 ## 📝 Note
 
