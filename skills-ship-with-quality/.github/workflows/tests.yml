@@ -26,6 +26,7 @@ on:
 
 permissions:
   contents: read
+  code-quality: write
 
 jobs:
   test-py:
@@ -49,6 +50,13 @@ jobs:
       - name: Run unit tests with coverage output
         run: pytest --cov=src --cov-report=xml:coverage/coverage-python.xml
 
+      - name: Upload Python coverage report to Code Quality
+        uses: actions/upload-code-coverage@v1
+        with:
+          file: coverage/coverage-python.xml
+          language: Python
+          label: code-coverage/pytest
+
   test-js:
     name: Run unit tests (javascript)
     runs-on: ubuntu-latest
@@ -67,3 +75,10 @@ jobs:
 
       - name: Run unit tests with coverage output
         run: npx jest # config specifies output to coverage/coverage-javascript.xml
+
+      - name: Upload JavaScript coverage report to Code Quality
+        uses: actions/upload-code-coverage@v1
+        with:
+          file: coverage/coverage-javascript.xml
+          language: JavaScript
+          label: code-coverage/jest
