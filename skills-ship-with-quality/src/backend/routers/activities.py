@@ -84,14 +84,14 @@ def signup_for_activity(
         raise HTTPException(status_code=404, detail="Activity not found")
 
     # Validate student is not already signed up
-    # if email in activity["participants"]:
-    #     raise HTTPException(
-    #         status_code=400, detail="Already signed up for this activity")
+    if email in activity["participants"]:
+        raise HTTPException(
+            status_code=400, detail="Already signed up for this activity")
 
-    # # Validate the activity is not already at capacity
-    # if len(activity["participants"]) >= activity["max_participants"]:
-    #     raise HTTPException(
-    #         status_code=400, detail="This activity is already full")
+    # Validate the activity is not already at capacity
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(
+            status_code=400, detail="This activity is already full")
 
     # Add student to participants
     result = activities_collection.update_one(
